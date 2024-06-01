@@ -4,20 +4,40 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
+    const prefix = 'Task-';
     const randomNumber = Math.floor(Math.random() * 1000);
-    const taskId =randomNumber.toString();
+    const taskId = prefix +randomNumber.toString();
     
     return taskId;
 }
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-    
+    const taskCard = $('<div>');
+
+    taskCard.addClass('card task-card draggable my-3');
+    taskCard.attr('task-id', task.id)
+
+    const cardHeader = $('<div>')
+        .addClass('card-header h4')
+        .text(task.name);
+    const cardBody = $('<div')
+        .addClass('card-body')
+    const cardDescription = $('<p>')
+        .addClass('card-text')
+        .text(task.description);
+    const cardDueDate = $('<p>')
+        .addClass('card-text')
+        .text(task.dueDate);
+    const cardDeleteBtn = $('<button>')
+        .addClass('btn btn-danger delete')
+        .text('Delete')
+        .attr('task-id', task.id);
 }
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-
+    
 }
 
 // Todo: create a function to handle adding a new task
