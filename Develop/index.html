@@ -30,8 +30,8 @@
       <fieldset>
         <label for="taskName">Task Name:</label>
         <input type="text" name="taskName" id="taskName" class="text ui-widget-content ui-corner-all">
-        <label for="dueDate">Task Due Date:</label>
-        <input type="text" name="dueDate" id="dueDate" class="text ui-widget-content ui-corner-all">
+        <label for="taskDueDate">Task Due Date:</label>
+        <input type="text" name="taskDueDate" id="taskDueDate" class="text ui-widget-content ui-corner-all">
         <label for="taskDescription">Task Description:</label>
         <input type="text" name="taskDescription" id="taskDescription" class="text ui-widget-content ui-corner-all">
    
@@ -40,7 +40,7 @@
       </fieldset>
     </form>
   </div>  
-    <div class="row swim-lanes text-center justify-content-between">
+    <div class="row swim-lanes text-center justify-content-between" id="taskDisplay">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
           <div class="card-header bg-white">
@@ -82,10 +82,9 @@
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 
-   <script src="./assets/js/script.js"></script>
   <script>
    $(function() {
-    var dialog = $("#formModal").dialog({
+    var dialog = $("#taskModal").dialog({
       autoOpen: false,
       height: 400,
       width: 350,
@@ -108,6 +107,8 @@
     });
   });
 </script>
+
+<script src="./assets/js/script.js"></script>
 </body>
 
 </html>
