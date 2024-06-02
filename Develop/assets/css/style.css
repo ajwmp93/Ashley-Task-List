@@ -14,3 +14,7 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+
+#dialog-form {
+  z-index: 9999;
+}

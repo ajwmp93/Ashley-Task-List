@@ -10,7 +10,7 @@
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+  
   <link rel="stylesheet" href="./assets/css/style.css" />
   <title>Task Board</title>
 </head>
@@ -22,22 +22,24 @@
   </header>
   <div class="container">
     <div class="text-center mb-5">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+      <button class="btn btn-success" id="addTask" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
-    <div id="dialog-form" title="Create new task" style="display: none;">
-      <form>
-        <fieldset>
-          <label for="task-name">Task Name</label>
-          <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
-          <label for="due-date">Task Due Date</label>
-          <input type="text" name="due-date" id="dueDate" class="text ui-widget-content ui-corner-all">
-          <label for="task-description">Task Description</label>
-          <input type="text" name="description" id="description" class="text ui-widget-content ui-corner-all">
-          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-      </form>
-    </div>
+    <dialog id="taskModal" title="Add Task">
+    <form id="taskForm">
+      <fieldset>
+        <label for="taskName">Task Name:</label>
+        <input type="text" name="taskName" id="taskName" class="text ui-widget-content ui-corner-all">
+        <label for="dueDate">Task Due Date:</label>
+        <input type="text" name="dueDate" id="dueDate" class="text ui-widget-content ui-corner-all">
+        <label for="taskDescription">Task Description:</label>
+        <input type="text" name="taskDescription" id="taskDescription" class="text ui-widget-content ui-corner-all">
+   
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+        <button type="submit" id="submitTask" class="btn btn-success" tabindex="-1" style="position:absolute; top:-1000px">Submit</button>
+      </fieldset>
+    </form>
+  </div>  
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
@@ -78,9 +80,34 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-  <script src="./assets/js/script.js"></script>
+   integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+
+   <script src="./assets/js/script.js"></script>
+  <script>
+   $(function() {
+    var dialog = $("#formModal").dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Submit": function() {
+          dialog.dialog("close");
+        },
+        "Cancel": function() {
+          dialog.dialog("close");
+        }
+      }
+    });
+    $("#addTask").on("click", function() {
+      dialog.dialog("open");
+    });
+    $("taskForm").on("submit", function(event) {
+      event.preventDefault();
+      dialog.dialog("close");
+    });
+  });
+</script>
 </body>
 
 </html>
