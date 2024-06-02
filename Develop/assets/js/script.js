@@ -24,14 +24,16 @@ function generateTaskId() {
 // Todo: create a function to create a task card
 function createTaskCard(task) {
 
+}
+
 
 // Todo: create a function to render the task list and make cards draggable
-function renderTaskList(tasks) {
+function renderTaskList(task) {
     const taskListContainer = $('#taskList');
 
     taskListContainer.empty();
 
-    tasks.forEach(task => {
+    task.forEach(task => {
         const taskCard = createTaskCard(task);
 
         if (taskCard) {
