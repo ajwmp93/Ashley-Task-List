@@ -23,48 +23,11 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-    const taskCard = $('<div>');
 
-    taskCard.addClass('card task-card draggable my-3');
-    taskCard.attr('task-id', task.id)
-
-    const cardHeader = $('<div>')
-        .addClass('card-header h4')
-        .text(task.name);
-    const cardBody = $('<div')
-        .addClass('card-body')
-    const cardDescription = $('<p>')
-        .addClass('card-text')
-        .text(task.description);
-    const cardDueDate = $('<p>')
-        .addClass('card-text')
-        .text(task.dueDate);
-    const cardDeleteBtn = $('<button>')
-        .addClass('btn btn-danger delete')
-        .text('Delete')
-        .attr('task-id', task.id);
-
-    if (task.dueDate && task.status !== 'done') {
-        const now = dayjs();
-        const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
-
-        if (now.isSame(taskDueDate, 'day')) {
-            taskCard.addClass('bg-warning text-white');
-        }
-        else if (now.isAfter(taskDueDate)) {
-            taskCard.addClass('bg-danger text-white');
-            cardDeleteBtn.addClass('border-light');
-        }
-    }
-    cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
-    taskCard.append(cardHeader, cardBody);
-
-    return taskCard;
-}
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList(tasks) {
-    const taskListContainer = $('#task-list');
+    const taskListContainer = $('#taskList');
 
     taskListContainer.empty();
 
@@ -97,7 +60,7 @@ function handleAddTask(event) {
             createTaskCard(taskName, taskDescription, taskDueDate);
 
             dialog.dialog('close');
-            
+
             const newTask = {
                 id: generateTaskId(),
                 name: taskName,
@@ -156,7 +119,7 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-    renderTaskList();
+    createTaskCard();
 
     $(function () {
     $('#taskDueDate').datepicker({
