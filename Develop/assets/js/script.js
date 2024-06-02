@@ -94,6 +94,10 @@ function handleAddTask(event) {
             const taskDescription = $('#taskDescription').val();
             const taskDueDate = $('#taskDueDate').val();
 
+            createTaskCard(taskName, taskDescription, taskDueDate);
+
+            dialog.dialog('close');
+            
             const newTask = {
                 id: generateTaskId(),
                 name: taskName,
@@ -116,7 +120,7 @@ function handleAddTask(event) {
 function handleDeleteTask(event) {
     $(document).ready(function() {
         $('.close').click(function() {
-            $('taskModal').hide();
+            $('#taskModal').hide();
         });
 
         $('#taskList').on('click', '.delete', function() {
