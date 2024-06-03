@@ -31,7 +31,7 @@ function createTaskCard(task) {
     const cardHeader = $('<div>')
         .addClass('card-header h4')
         .text(task.name);
-    const cardBody = $('<div')
+    const cardBody = $('<div>')
         .addClass('card-body')
     const cardDescription = $('<p>')
         .addClass('card-text')
@@ -46,7 +46,7 @@ function createTaskCard(task) {
 
     if (task.dueDate && task.status !== 'done') {
         const now = dayjs();
-        const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+        const taskDueDate = dayjs(taskDueDate, 'DD/MM/YYYY');
 
         if (now.isSame(taskDueDate, 'day')) {
             taskCard.addClass('bg-warning text-white');
@@ -65,7 +65,7 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList(task) {
-    const taskListContainer = $('#taskList');
+    const taskListContainer = $('.container');
 
     taskListContainer.empty();
 
@@ -80,61 +80,56 @@ function renderTaskList(task) {
         });
         }
     });
-
+    
 }
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event) {
-    $(document).ready(function() {
-        $('#addTask').click(function() {
-          $('#taskModal').show();
-          $('#taskForm').submit(function(event) {
+    $('#submitTask').click(function() {
+        $('#taskModal').show();
+        $('#taskForm').submit(function(event) {
             event.preventDefault();
 
-            const taskName = $('#taskName').val();
-            const taskDescription = $('#taskDescription').val();
-            const taskDueDate = $('#taskDueDate').val();
+        const taskName = $('#taskName').val();
+        const taskDescription = $('#taskDescription').val();
+        const taskDueDate = $('#taskDueDate').val();
 
-            createTaskCard(taskName, taskDescription, taskDueDate);
+        createTaskCard();
 
-            dialog.dialog('close');
+        dialog.dialog('close');
 
-            const newTask = {
-                id: generateTaskId(),
-                name: taskName,
-                description: taskDescription,
-                dueDate: taskDueDate,
-                status: 'to-do',
-            };
-            tasks.push(newTask);
+        const newTask = {
+            id: generateTaskId(),
+            name: taskName,
+            description: taskDescription,
+            dueDate: taskDueDate,
+            status: 'to-do',
+        };
+        task.push(newTask);
 
-            $('#taskModal').hide();
+        $('#taskModal').hide();
 
-            renderTaskList(tasks);
-          }) 
-        });
+        renderTaskList(task);
+        }) 
     });
 }
 
-
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event) {
-    $(document).ready(function() {
-        $('.close').click(function() {
-            $('#taskModal').hide();
-        });
+    $('.close').click(function() {
+        $('#taskModal').hide();
+    });
 
-        $('#taskList').on('click', '.delete', function() {
-            const taskId = $(this).attr('taskId');
+     $('#taskList').on('click', '.delete', function() {
+        const taskId = $(this).attr('taskId');
 
-            const taskIndex = task.findIndex(task => task.id === taskId);
+        const taskIndex = task.findIndex(task => task.id === taskId);
 
-            if (taskIndex !== -1) {
-                tasks.splice(taskIndex, 1);
+        if (taskIndex !== -1) {
+            tasks.splice(taskIndex, 1);
 
-                renderTaskList(tasks);
-            }
-        });
+            renderTaskList(tasks);
+        }
     });
 }
 
@@ -150,6 +145,7 @@ function handleDrop(event, ui) {
             task.status = newStatus;
         }
     }
+    
     taskFormEl.on('submit', handleAddTask)
 
     taskDisplayEl.on('click', '.btn', handleDeleteTask)

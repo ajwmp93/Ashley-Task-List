@@ -26,17 +26,18 @@
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
     <dialog id="taskModal" title="Add Task">
-    <form id="taskForm">
-      <fieldset>
-        <label for="taskName">Task Name:</label>
-        <input type="text" name="taskName" id="taskName" class="text ui-widget-content ui-corner-all">
-        <label for="taskDueDate">Task Due Date:</label>
-        <input type="text" name="taskDueDate" id="taskDueDate" class="text ui-widget-content ui-corner-all">
-        <label for="taskDescription">Task Description:</label>
-        <input type="text" name="taskDescription" id="taskDescription" class="text ui-widget-content ui-corner-all">
-        <button type="submit" id="submitTask" class="btn btn-success" tabindex="-1" style="position:absolute; top:-1000px">Submit</button>
-      </fieldset>
-    </form>
+      <form id="taskForm">
+        <fieldset>
+          <label for="taskName">Task Name:</label>
+          <input type="text" name="taskName" id="taskName" class="text ui-widget-content ui-corner-all">
+          <label for="taskDueDate">Task Due Date:</label>
+          <input type="text" name="taskDueDate" id="taskDueDate" class="text ui-widget-content ui-corner-all">
+          <label for="taskDescription">Task Description:</label>
+          <input type="text" name="taskDescription" id="taskDescription" class="text ui-widget-content ui-corner-all">
+          <button type="submit" id="submitTask" class="btn btn-success" tabindex="1" style="position:absolute; bottom:-2px;">Submit</button>
+        </fieldset>
+      </form>
+    </dialog>
   </div>  
     <div class="row swim-lanes text-center justify-content-between" id="taskDisplay">
       <div class="col-12 col-lg-4 d-flex">
@@ -88,9 +89,6 @@
       width: 350,
       modal: true,
       buttons: {
-        "Submit": function() {
-          dialog.dialog("close");
-        },
         "Cancel": function() {
           dialog.dialog("close");
         }
@@ -99,7 +97,7 @@
     $("#addTask").on("click", function() {
       dialog.dialog("open");
     });
-    $("taskForm").on("submit", function(event) {
+    $("submitTask").on("submit", function(event) {
       event.preventDefault();
       dialog.dialog("close");
     });
