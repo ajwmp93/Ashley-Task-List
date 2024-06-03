@@ -58,7 +58,7 @@ function createTaskCard(task) {
     }
     cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
     taskCard.append(cardHeader, cardBody);
-
+    
     return taskCard;
 }
 
